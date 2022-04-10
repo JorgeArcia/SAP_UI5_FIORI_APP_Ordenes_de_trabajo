@@ -1,0 +1,58 @@
+<core:FragmentDefinition 
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout">
+    <Dialog title="Editar Materiales" id="oDialogUpdateMateriales" busyIndicatorDelay="0" contentWidth="50%">
+        <f:SimpleForm id="SimpleFormChange354"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title="Editar Material"
+			labelSpanXL="3"
+			labelSpanL="3"
+			labelSpanM="3"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="4"
+			emptySpanL="4"
+			emptySpanM="4"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label text="{i18n>columna_IdMaterial}" />
+				<Input id="idmaterial" value="{EditarMateriales>/IdMaterial}" editable="false"/>
+
+				<Label text="{i18n>columna_empleado}" />
+				<!-- <Input id="idempleado" value="{EditarMateriales>/IdEmpleado}"/> -->
+                <Input id="IdEmpleado" enabled="true" editable="true" showValueHelp="true" valueHelpOnly="false" 
+                valueHelpRequest="onValueHelpEmpleado"/>
+
+				<Label text="{i18n>columna_NombreProducto}" />
+				<Input id="nomProducto" value="{EditarMateriales>/NombreProducto}" />
+
+				<Label text="{i18n>columna_Servicio}" />
+				<Select id="idServicio" forceSelection="false" items="{ path:'/ServicioSet'}" selectedKey="{SERVICIO}" enabled="true">
+                    <core:ListItem key="{CodServicio}" text="{DescServicio}"></core:ListItem>
+                </Select>
+
+                <Label text="{i18n>columna_CategoriaMaterial}" />
+				<!-- <Input id="catgMaterial" value="{EditarMateriales>/CategoriaMaterial}" /> -->
+                <Input id="idCategoria" enabled="true" editable="true" showValueHelp="true" valueHelpOnly="false" 
+                valueHelpRequest="onValueHelpCategoria"/>
+
+                <Label text="{i18n>columna_Fabricante}" />
+				<Input id="fabricante" value="{EditarMateriales>/Fabricante}" />
+
+                <Label text="{i18n>columna_Cantidad}" />
+				<Input id="cantidad" value="{EditarMateriales>/Cantidad}" />
+			</f:content>
+		</f:SimpleForm>
+        <buttons>
+            <Button text="Cancelar" press="onCloseUpdate"/>
+            <Button text="Guardar" press="onUpdateMateriales" type="Emphasized"/>
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

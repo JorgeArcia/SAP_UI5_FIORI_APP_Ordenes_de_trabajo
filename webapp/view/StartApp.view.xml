@@ -1,0 +1,60 @@
+<mvc:View 
+    xmlns:core="sap.ui.core"
+    controllerName="academia2022.luuc3ordenes.controller.StartApp"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout"
+    xmlns:grid="sap.ui.layout.cssgrid"
+>
+    <Shell id="shell">
+        <App id="app">
+            <pages>
+                <Page id="page" title="{i18n>title_main}">
+                    <VBox id="idBanner" backgroundDesign="Solid" alignItems="Center" alignContent="Center" justifyContent="Center" width="100%" visible="true">
+                        <Image id="id_banner"/>
+                    </VBox>  
+                    <f:GridList id="gridList" class="gridList">
+                            <f:customLayout>
+                                <grid:GridBoxLayout boxWidth="auto" />
+                            </f:customLayout>
+
+                            <f:GridListItem class="gridItem">
+                                <VBox class="sapUiSmallMargin">
+                                    <layoutData>
+                                        <FlexItemData growFactor="1" shrinkFactor="0" />
+                                    </layoutData>
+
+                                    <Title class="title" 
+                                           text= "Ordenes de trabajo" 
+                                           wrapping="false"/>
+                                    <Label text="Visualizar ordenes de trabajo" wrapping="true" />
+                                   
+                                    <HBox alignItems="End" class="HBox">
+                                        <Button press="onVisualizarOrdenes" type="Accept" icon="sap-icon://open-command-field" text="Ver Ordenes de trabajo"></Button>
+                                    </HBox>
+                                </VBox>
+                            </f:GridListItem>
+                            <f:GridListItem class="gridItem">
+                                <VBox class="sapUiSmallMargin">
+                                    <layoutData>
+                                        <FlexItemData growFactor="1" shrinkFactor="0" />
+                                    </layoutData>
+
+                                    <Title class="title" 
+                                           text= "Materiales a usar en la obra" 
+                                           wrapping="false"/>
+                                    <Label text="Visualizar materiales" wrapping="true" />
+                                   
+                                    <HBox alignItems="End" class="HBox">
+                                        <Button press="onVisualizarMateriales" type="Accept" icon="sap-icon://open-command-field" text="Ver Materiales"></Button>
+                                    </HBox>
+                                </VBox>
+                            </f:GridListItem>
+                        </f:GridList>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>

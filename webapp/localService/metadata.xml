@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZOS_ACADEMIA_JLAH_ORDENES_SRV" xml:lang="es" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Ordenes" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdOrdenTrabajo"/>
+                    <PropertyRef Name="Fecha"/>
+                </Key>
+                <Property Name="IdOrdenTrabajo" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Orden" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Generada_por" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Cliente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Empleado" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Nro empleado" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Descripcion" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Descripcion" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Prioridad" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Prioridad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fecha" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Creado el" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ubicacion" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Ubicacion de la OT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="MaterialesSet" Relationship="ZOS_ACADEMIA_JLAH_ORDENES_SRV.OrdenesToMateriales" FromRole="FromRole_OrdenesToMateriales" ToRole="ToRole_OrdenesToMateriales"/>
+            </EntityType>
+            <EntityType Name="Materiales" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdOrdenTrabajo"/>
+                    <PropertyRef Name="Fecha"/>
+                    <PropertyRef Name="IdMaterial"/>
+                </Key>
+                <Property Name="IdOrdenTrabajo" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Orden" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fecha" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Creado el" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IdMaterial" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NombreProducto" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Nombre del producto" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Servicio" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Servicio" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CategoriaMaterial" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Categoria" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fabricante" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Proveedor mcía." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Cantidad" Type="Edm.Byte" Nullable="false" sap:unicode="false" sap:label="Cantidad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="Ordenes" Relationship="ZOS_ACADEMIA_JLAH_ORDENES_SRV.OrdenesToMateriales" FromRole="ToRole_OrdenesToMateriales" ToRole="FromRole_OrdenesToMateriales"/>
+            </EntityType>
+            <Association Name="OrdenesToMateriales" sap:content-version="1">
+                <End Type="ZOS_ACADEMIA_JLAH_ORDENES_SRV.Ordenes" Multiplicity="1" Role="FromRole_OrdenesToMateriales"/>
+                <End Type="ZOS_ACADEMIA_JLAH_ORDENES_SRV.Materiales" Multiplicity="*" Role="ToRole_OrdenesToMateriales"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_OrdenesToMateriales">
+                        <PropertyRef Name="IdOrdenTrabajo"/>
+                        <PropertyRef Name="Fecha"/>
+                    </Principal>
+                    <Dependent Role="ToRole_OrdenesToMateriales">
+                        <PropertyRef Name="IdOrdenTrabajo"/>
+                        <PropertyRef Name="Fecha"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZOS_ACADEMIA_JLAH_ORDENES_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="OrdenesSet" EntityType="ZOS_ACADEMIA_JLAH_ORDENES_SRV.Ordenes" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="MaterialesSet" EntityType="ZOS_ACADEMIA_JLAH_ORDENES_SRV.Materiales" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="OrdenesToMaterialesSet" Association="ZOS_ACADEMIA_JLAH_ORDENES_SRV.OrdenesToMateriales" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="OrdenesSet" Role="FromRole_OrdenesToMateriales"/>
+                    <End EntitySet="MaterialesSet" Role="ToRole_OrdenesToMateriales"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://stks4hpil.eastus2.cloudapp.azure.com:8002/sap/opu/odata/sap/ZOS_ACADEMIA_JLAH_ORDENES_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://stks4hpil.eastus2.cloudapp.azure.com:8002/sap/opu/odata/sap/ZOS_ACADEMIA_JLAH_ORDENES_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

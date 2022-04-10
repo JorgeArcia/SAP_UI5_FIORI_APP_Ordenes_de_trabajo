@@ -1,0 +1,163 @@
+{
+    "_version": "1.28.0",
+    "sap.app": {
+        "id": "academia2022.luuc3ordenes",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZOS_ACADEMIA_JLAH_ORDENES_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "academia2022.luuc3ordenes-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "Ordenes",
+                    "action": "Display",
+                    "title": "Ordenes",
+                    "subTitle": "Visualización",
+                    "icon": "sap-icon://customer-order-entry"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.84.1",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "academia2022.luuc3ordenes.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "disableHeadRequestForToken": true,
+                    "useBatch": false
+                }
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "academia2022.luuc3ordenes.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "RouteStartApp",
+                    "pattern": "RouteStartApp",
+                    "target": [
+                        "TargetStartApp"
+                    ]
+                },
+                {
+                    "name": "RouteOrdenes",
+                    "pattern": "RouteOrdenes",
+                    "target": [
+                        "TargetOrdenes"
+                    ]
+                },
+                {
+                    "name": "materiales",
+                    "pattern": "MaterialesSet/{IdOrdenTrabajo},{Fecha}",
+                    "target":[
+                        "TargetMateriales"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetStartApp": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewName": "StartApp"
+                },
+                "TargetOrdenes": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewName": "Ordenes"
+                },
+                "TargetMateriales": {
+                    "viewType": "XML",
+                    "transition": "flip",
+                    "clearControlAggregation": false,
+                    "viewName": "Materiales"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "academia2022.luuc3ordenes.view.StartApp",
+            "type": "XML",
+            "async": true,
+            "id": "StartApp"
+        }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "academia2022-luuc3ordenes"
+    }
+}

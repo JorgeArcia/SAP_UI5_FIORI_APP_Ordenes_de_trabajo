@@ -1,0 +1,10 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<SelectDialog
+		title="Seleccione Empleado" 
+		items="{ path: 'MatchEmpleados>/'}" 
+		search="onSearchEmpleados" 
+		confirm="_closeValueHelpEmpleados"
+		cancel="_closeEmpleados">
+		<StandardListItem title="{MatchEmpleados>idLegajo}" info="{MatchEmpleados>nombreEmp}  {MatchEmpleados>apellidoEmp}"></StandardListItem>
+	</SelectDialog>
+</core:FragmentDefinition>

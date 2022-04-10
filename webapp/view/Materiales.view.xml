@@ -1,0 +1,135 @@
+<mvc:View
+    xmlns:core="sap.ui.core"
+    controllerName="academia2022.luuc3ordenes.controller.Materiales"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:fb="sap.ui.comp.filterbar"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <Shell id="shell">
+        <App id="app">
+            <pages>
+                <Page id="page" title="{i18n>title}">
+                    <content>
+                    <ObjectHeader
+                    responsive="true"
+                    intro="Descripcion: {ModeloLocalOrdenes>/Descripcion}"
+                    title="N° Orden de Trabajo: {ModeloLocalOrdenes>/IdOrdenTrabajo} - Fecha: {ModeloLocalOrdenes>/Fecha}"
+                    number="{ModeloLocalOrdenes>/DescPrioridad}"
+                    numberState="{ path: 'ModeloLocalOrdenes>/Prioridad', formatter: '.formatter.formatearPrioridad' }"
+                    backgroundDesign="Translucent">
+                    <attributes>
+                        <ObjectAttribute
+                            title="Sucursal"
+                            text="{ModeloLocalOrdenes>/DescUbicacion}"/>
+                        <ObjectAttribute 
+                            title="Posicion de trabajo"
+                            text="{ModeloLocalOrdenes>/Posicion}"/>
+                    </attributes>
+                    <statuses>
+                        <ObjectStatus
+                            title="Status de la Orden"
+                            text="{ModeloLocalOrdenes>/DescStatus}"
+                            state="{ path: 'ModeloLocalOrdenes>/Status', formatter: '.formatter.formaterarStatus' }" />
+                    </statuses>
+	                </ObjectHeader>
+                    <fb:FilterBar id="idFilterBar" reset="onReset" showRestoreButton="false" showClearButton="false"
+                        showGoOnFB="false" useToolbar="true" showFilterConfiguration="false">
+                        <fb:filterItems>
+                            <fb:FilterItem name="idEmpleadoFilter" label="Seleccione Empleado" id="idEmpleadoFilter">
+                                <fb:control>
+                                    <Input id="IdEmpleado" enabled="true" editable="true" showValueHelp="true" valueHelpOnly="false" valueHelpRequest="onValueHelpEmpleado" change="onFiltrarMateriales"/>
+                                </fb:control>
+                            </fb:FilterItem>
+                        </fb:filterItems>
+                        <fb:filterItems>
+                            <fb:FilterItem name="idServicioFilter" label="Servicio" id="idServicioFilter">
+                                <fb:control>
+                                    <Select id="idServicio" forceSelection="false" change="onFiltrarMateriales" items="{ path:'/ServicioSet'}" selectedKey="{SERVICIO}" enabled="true">
+                                        <core:ListItem key="{CodServicio}" text="{DescServicio}"></core:ListItem>
+                                    </Select>
+                                </fb:control>
+                            </fb:FilterItem>
+                        </fb:filterItems>
+                        <fb:filterItems>
+                            <fb:FilterItem name="idCategoriaFilter" label="Categoria del material" id="idCaterogiaFilter">
+                                <fb:control>
+                                    <Input id="idCategoria" enabled="true" editable="true" showValueHelp="true" valueHelpOnly="false" valueHelpRequest="onValueHelpCategoria" change="onFiltrarMateriales"/>
+                                </fb:control>
+                            </fb:FilterItem>
+                        </fb:filterItems>
+                        <Button text="resetear filtros" press="onResetFiltros" type="Emphasized" class="sapUiSmallMarginTop sapUiTinyMarginEnd"/>
+                        </fb:FilterBar>
+                        <VBox alignItems="End">
+                            <Button text="Agregar Material" press="onAddMaterial" type="Emphasized" class="sapUiSmallMarginTop sapUiTinyMarginEnd"/>
+                        </VBox>
+                        <Table id="idMateriales" items="{ModeloLocalMateriales>/}" alternateRowColors="true" noDataText="Materiales de trabajo no encontrados" fixedLayout="false">
+                            <columns>
+                                <Column>
+                                    <header>
+                                        <Label text="{i18n>columna_IdMaterial}"/>
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="{i18n>columna_empleado}"/>
+                                    </header>
+                                </Column>
+                                 <Column>
+                                    <header>
+                                        <Label text="{i18n>columna_NombreProducto}"/>
+                                    </header>
+                                </Column>
+                                 <Column>
+                                    <header>
+                                        <Label text="{i18n>columna_Servicio}"/>
+                                    </header>
+                                </Column>
+                                 <Column>
+                                    <header>
+                                        <Label text="{i18n>columna_CategoriaMaterial}"/>
+                                    </header>
+                                </Column>
+                                 <Column>
+                                    <header>
+                                        <Label text="{i18n>columna_Fabricante}"/>
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="{i18n>columna_Cantidad}"/>
+                                    </header>
+                                </Column>
+                                 <Column width="3rem">
+                                    <header>
+                                        <Label text=""/>
+                                    </header>
+                                </Column>
+                                <Column width="3rem">
+                                    <header>
+                                        <Label text=""/>
+                                    </header>
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <cells>
+                                        <ObjectIdentifier text="{ModeloLocalMateriales>IdMaterial}"/>
+                                        <Text text="{ModeloLocalMateriales>NombreEmp} {ModeloLocalMateriales>ApellidoEmp}"/>
+                                        <Text text="{ModeloLocalMateriales>NombreProducto}"/>
+                                        <Text text="{ModeloLocalMateriales>DescServicio}"/>
+                                        <Text text="{ModeloLocalMateriales>CategoriaMaterial}"/>
+                                        <Text text="{ModeloLocalMateriales>Fabricante}"/>
+                                        <Text text="{ModeloLocalMateriales>Cantidad}"/>
+                                        <Button icon="sap-icon://edit" press="onUpdateMaterial"/>
+                                        <Button icon="sap-icon://delete" press="onBorrarMaterial"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>

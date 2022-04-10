@@ -1,0 +1,119 @@
+<mvc:View 
+    xmlns:core="sap.ui.core"
+    controllerName="academia2022.luuc3ordenes.controller.Ordenes"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:fb="sap.ui.comp.filterbar"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <Shell id="shell">
+        <App id="app">
+            <pages>
+                <Page id="page" title="{i18n>title}" showNavButton="true" navButtonPress="onNavBack">
+                    <content>
+                        <fb:FilterBar id="idFilterBar" reset="onReset" showRestoreButton="false" showClearButton="false"
+                        showGoOnFB="false" useToolbar="true" showFilterConfiguration="false">
+                        <fb:filterItems>
+                            <fb:FilterItem name="idOrden" label="N° Orden de Trabajo" id="idOrdenFilter">
+                                <fb:control>
+                                    <Input id="idOrden" placeholder="Ingrese numero de la orden" liveChange="onFiltrarOrdenes"/>
+                                </fb:control>
+                            </fb:FilterItem>
+                        </fb:filterItems>
+                        <fb:filterItems>
+                            <fb:FilterItem name="idSucursalFilter" label="Sucursal" id="idSucursalFilter">
+                                <fb:control>
+                                    <Input id="idSucursal" placeholder="Seleccione una sucursal" enabled="true" editable="true" showValueHelp="true" valueHelpOnly="false" valueHelpRequest="onValueHelpSucursales" change="onFiltrarOrdenes"/>
+                                </fb:control>
+                            </fb:FilterItem>
+                        </fb:filterItems>
+                        <fb:filterItems>
+                            <fb:FilterItem name="idStatus" label="Status" id="idStatusFilter">
+                                <fb:control>
+                                    <Select id="idStatus" forceSelection="false" change="onFiltrarOrdenes" items="{ path:'/StatusSet'}" selectedKey="{STATUS}" enabled="true">
+                                        <core:ListItem key="{CodStatus}" text="{DescStatus}"></core:ListItem>
+                                    </Select>
+                                </fb:control>
+                            </fb:FilterItem>
+                        </fb:filterItems>
+                        <Button text="resetear filtros" press="onResetFiltros" type="Emphasized" class="sapUiSmallMarginTop sapUiTinyMarginEnd"/>
+                        </fb:FilterBar>
+                         <VBox alignItems="End">
+                            <Button text="Agregar Orden de trabajo" press="onAddOrdenTrabajo" type="Emphasized" class="sapUiSmallMarginTop sapUiTinyMarginEnd"/>
+                        </VBox>
+                        <Table id="idOrdenes" items="{ModeloLocalOrdenes>/}" alternateRowColors="true" noDataText="Ordenes de trabajo no encontradas" fixedLayout="false">
+                            <columns>
+                                <Column>
+                                    <header>
+                                        <Label text="{i18n>columna_idOrdenTrabajo}"/>
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="{i18n>columna_fecha}"/>
+                                    </header>
+                                </Column>
+                                 <Column>
+                                    <header>
+                                        <Label text="{i18n>columna_cliente}"/>
+                                    </header>
+                                </Column>
+                                 <Column>
+                                    <header>
+                                        <Label text="{i18n>columna_descripcion}"/>
+                                    </header>
+                                </Column>
+                                 <Column>
+                                    <header>
+                                        <Label text="{i18n>columna_prioridad}"/>
+                                    </header>
+                                </Column>
+                                 <Column>
+                                    <header>
+                                        <Label text="{i18n>columna_ubicacion}"/>
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="{i18n>columna_posicion}"/>
+                                    </header>
+                                </Column>
+                                 <Column>
+                                    <header>
+                                        <Label text="{i18n>columna_status}"/>
+                                    </header>
+                                </Column>
+                                <Column width="3rem">
+                                    <header>
+                                        <Label text=""/>
+                                    </header>
+                                </Column>
+                                <Column width="3rem">
+                                    <header>
+                                        <Label text=""/>
+                                    </header>
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Navigation" press="OnVisualizarMateriales" highlight="{ path: 'ModeloLocalOrdenes>Prioridad', formatter: '.formatter.formatearPrioridad' }">
+                                    <cells>
+                                        <ObjectIdentifier text="{ModeloLocalOrdenes>IdOrdenTrabajo}"/>
+                                        <ObjectIdentifier text="{ModeloLocalOrdenes>Fecha}"/>
+                                        <Text text="{ModeloLocalOrdenes>Generada_por}"/>
+                                        <Text text="{ModeloLocalOrdenes>Descripcion}"/>
+                                        <Text text="{ModeloLocalOrdenes>DescPrioridad}"/>
+                                        <Text text="{ModeloLocalOrdenes>DescUbicacion}"/>
+                                        <Text text="{ModeloLocalOrdenes>Posicion}"/>
+                                        <Text text="{ModeloLocalOrdenes>DescStatus}"/>
+                                        <Button icon="sap-icon://edit" press="onUpdateOrden"/>
+                                        <Button icon="sap-icon://delete" press="onBorrarOrden"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>

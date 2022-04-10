@@ -1,0 +1,63 @@
+<core:FragmentDefinition 
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:fb="sap.ui.comp.filterbar"
+    displayBlock="true">
+    <Dialog title="Agregar Orden de trabajo" id="oDialogAddOrdenes" busyIndicatorDelay="0" contentWidth="50%">
+        <f:SimpleForm id="SimpleFormChange354"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title="Address"
+			labelSpanXL="3"
+			labelSpanL="3"
+			labelSpanM="3"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="4"
+			emptySpanL="4"
+			emptySpanM="4"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label text="{i18n>columna_idOrdenTrabajo}" />
+				<Input id="idOrden" value="{ModeloLocalOrdenes>IdOrdenTrabajo}" />
+
+				<Label text="{i18n>columna_fecha}" />
+                <Input id="idFecha" value="{ModeloLocalOrdenes>Fecha}" type="Date"/>
+
+				<Label text="{i18n>columna_cliente}" />
+				<Input id="idCliente" value="{ModeloLocalOrdenes>Generada_por}" />
+
+                <Label text="{i18n>columna_descripcion}" />
+				<Input id="descripcion" value="{ModeloLocalOrdenes>Descripcion}" />
+
+				<Label text="{i18n>columna_prioridad}" />
+				<Select id="idPrioridad" forceSelection="false" items="{ path:'/PrioridadSet'}" selectedKey="{PRIORIDAD}" enabled="true">
+                    <core:ListItem key="{CodPrioridad}" text="{DescPrioridad}"></core:ListItem>
+                </Select>
+
+                <Label text="{i18n>columna_ubicacion}" />
+                <Input id="idSucursal" enabled="true" editable="true" showValueHelp="true" valueHelpOnly="false" 
+                valueHelpRequest="onValueHelpSucursales"/>
+
+                <Label text="{i18n>columna_posicion}" />
+				<Input id="posicion" value="{ModeloLocalOrdenes>Posicion}" />
+
+                <Label text="{i18n>columna_status}" />
+				<Select id="idStatus" forceSelection="false" change="onFiltrarOrdenes" items="{ path:'/StatusSet'}" 
+                    selectedKey="{STATUS}" enabled="true">
+                    <core:ListItem key="{CodStatus}" text="{DescStatus}"></core:ListItem>
+                </Select>
+			</f:content>
+		</f:SimpleForm>
+        <buttons>
+            <Button text="Cancelar" press="onCloseDialogOrdenes"/>
+            <Button text="Guardar" press="onSaveOrdenes" type="Emphasized"/>
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>
